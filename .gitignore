@@ -3,3 +3,6 @@
 
 # Build tools
 dist/
+
+# Python
+__pycache__/
