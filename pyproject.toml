@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "nurse"
+version = "0.1.0"
+description = "A thoughtful dependency injection framework 💉"
+authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
