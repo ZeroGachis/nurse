@@ -1,8 +1,14 @@
 [tool.poetry]
 name = "nurse"
-version = "0.2.0"
+version = "0.2.1"
 description = "A thoughtful dependency injection framework 💉"
 authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
+
+readme = "README.rst"
+
+repository = "https://github.com/ZeroGachis/nurse"
+homepage = "https://github.com/ZeroGachis/nurse"
+keywords = ["dependency", "injection"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
