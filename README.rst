@@ -37,6 +37,7 @@ Installation
 
 
 It can also be installed with `pip`
+
 .. code:: sh
 
     pip3 install nurse
