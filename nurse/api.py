@@ -41,13 +41,13 @@ def inject(user_class):
     return user_class
 
 
-def serve(user_class, name=None) -> None:
+def serve(user_class, through=None) -> None:
     """
     Add an instance of a user-defined class to Nurse's services catalog.
     Given user_class is registered in the catalogue with its class name as key by default.
 
     :param user_class: User-defined class instance
-    :param name: Optional name to define specific access key for given user_class
+    :param through: Optional name to define specific access key for given user_class
     """
-    name = name or user_class.__class__
-    ServiceCatalog.get_instance().services[name] = user_class
+    through = through or user_class.__class__
+    ServiceCatalog.get_instance().services[through] = user_class
