@@ -1,4 +1,5 @@
 from .service_catalog import ServiceCatalog
+from logging import log
 
 
 def inject(user_class):
@@ -25,7 +26,11 @@ def inject(user_class):
         dependencies = constructor_with_dependency_injection.user_class.__annotations__
 
         for service_name, service_type in dependencies.items():
-            setattr(self, service_name, service_catalog.services[service_type])
+            if service_type in service_catalog.services:
+                instance = service_catalog.services[service_type]
+            else:
+                instance = service_type.__bases__[0]
+            setattr(self, service_name, instance)
 
         return constructor_with_dependency_injection.user_init(self, *args, **kwargs)
 
@@ -40,6 +45,10 @@ def inject(user_class):
 def serve(user_class, name=None) -> None:
     """
     Add an instance of a user-defined class to Nurse's services catalog.
+    Given user_class is registered in the catalogue with its class name as key by default.
+
+    :param user_class: User-defined class instance
+    :param name: Optional name to define specific access key for given user_class
     """
     name = name or user_class.__class__
     ServiceCatalog.get_instance().services[name] = user_class
