@@ -25,11 +25,7 @@ def inject(user_class):
         dependencies = constructor_with_dependency_injection.user_class.__annotations__
 
         for service_name, service_type in dependencies.items():
-            if service_type in service_catalog.services:
-                instance = service_catalog.services[service_type]
-            else:
-                instance = service_type.__bases__[0]
-            setattr(self, service_name, instance)
+            setattr(self, service_name, service_catalog.services[service_type])
 
         return constructor_with_dependency_injection.user_init(self, *args, **kwargs)
 
