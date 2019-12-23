@@ -1,4 +1,3 @@
-from unittest import TestCase
 import nurse
 
 
@@ -24,10 +23,11 @@ class MyClass:
     simple_dep_int: SimpleInterface
 
 
-class TestServe(TestCase):
-    def setUp(self) -> None:
+class TestServe:
+
+    def setup(self) -> None:
         nurse.serve(SimpleDep())
-        nurse.serve(SimpleDepWithInterface(), name=SimpleInterface)
+        nurse.serve(SimpleDepWithInterface(), through=SimpleInterface)
         self.my_class = MyClass()
 
     def test_simple_dep_instance(self):
