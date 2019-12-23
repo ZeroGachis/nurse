@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nurse"
-version = "0.2.2"
+version = "0.3"
 description = "A thoughtful dependency injection framework 💉"
 authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
 

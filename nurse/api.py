@@ -1,5 +1,4 @@
 from .service_catalog import ServiceCatalog
-from logging import log
 
 
 def inject(user_class):
