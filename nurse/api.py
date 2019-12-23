@@ -37,8 +37,9 @@ def inject(user_class):
     return user_class
 
 
-def serve(user_class) -> None:
+def serve(user_class, name=None) -> None:
     """
-	Add an instance of a user-defined class to Nurse's services catalog.
-	"""
-    ServiceCatalog.get_instance().catalogue[user_class.__class__] = user_class
+    Add an instance of a user-defined class to Nurse's services catalog.
+    """
+    name = name or user_class.__class__
+    ServiceCatalog.get_instance().catalogue[name] = user_class

@@ -5,7 +5,7 @@ Nurse
     :target: https://github.com/ZeroGachis/nurse#license
 
 
-.. image:: https://img.shields.io/badge/pypi-v0.2.1-blue.svg
+.. image:: https://img.shields.io/badge/pypi-v0.2.2-blue.svg
     :target: https://pypi.org/project/nurse/
 
 
