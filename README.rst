@@ -62,6 +62,21 @@ filled-in generally at the startup of your application.
     # Now, add it to nurse service catalog in order to use it later in your application
     nurse.serve(SSHClient())
 
+**Nurse** allows you to abstract dependencies through an optional name parameter allowing you to refer your class instance
+through its interface.
+
+.. code:: python3
+
+    import nurse
+
+    # A user defined class that will be used accross your application
+    class SSHClient(HTTPClient):
+
+        def user(self) -> str:
+            return "John Doe"
+
+    # Now, add it to nurse service catalog in order to use it later in your application
+    nurse.serve(SSHClient(), name=HTTPClient)
 
 Once you filled-in the service catalog with your different component, your can declare them as dependencies
 to any of your class.
