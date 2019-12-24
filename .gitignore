@@ -2,7 +2,13 @@
 .vscode/*
 
 # Build tools
+env/
 dist/
+nurse.egg-info/
+pip-wheel-metadata/
 
 # Python
 __pycache__/
+
+
+        
