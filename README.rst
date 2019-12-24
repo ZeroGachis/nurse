@@ -5,7 +5,7 @@ Nurse
     :target: https://github.com/ZeroGachis/nurse#license
 
 
-.. image:: https://img.shields.io/badge/pypi-v0.2.2-blue.svg
+.. image:: https://img.shields.io/badge/pypi-v0.3.0-blue.svg
     :target: https://pypi.org/project/nurse/
 
 
@@ -54,14 +54,29 @@ filled-in generally at the startup of your application.
     import nurse
     
     # A user defined class that will be used accross your application
-    class SSHClient:
+    class Player:
         
-        def user(self) -> str:
+        def name(self, name) -> str:
             return "John Doe"
     
     # Now, add it to nurse service catalog in order to use it later in your application
-    nurse.serve(SSHClient())
+    nurse.serve(Player())
 
+**Nurse** allows you to abstract dependencies through an optional name parameter allowing you to refer your class instance
+through its interface.
+
+.. code:: python3
+
+    import nurse
+
+    # A user defined class that will be used accross your application
+    class Player(User):
+
+        def name(self) -> str:
+            return "John Doe"
+
+    # Now, add it to nurse service catalog in order to use it later in your application
+    nurse.serve(Player(), name=User)
 
 Once you filled-in the service catalog with your different component, your can declare them as dependencies
 to any of your class.
@@ -71,15 +86,15 @@ to any of your class.
     import nurse
 
     @nurse.inject
-    class Server:
-        ssh_client: SSHClient
+    class Game:
+        player: Player
 
         def response(self) -> str:
-            return f"Hello {self.ssh_client.user()} !"
+            return f"Hello {self.player.name()} !"
     
 
-    server = Server()
-    server.response()
+    Game = Game()
+    game.response()
     # Hello John Doe !
 
 

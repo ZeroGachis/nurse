@@ -3,7 +3,7 @@ from .service_catalog import ServiceCatalog
 
 def inject(user_class):
     """
-	A decorator that injects dependencies into every instances of a user-defined class.
+    A decorator that injects dependencies into every instances of a user-defined class.
 
     :Example:
 
@@ -37,9 +37,13 @@ def inject(user_class):
     return user_class
 
 
-def serve(user_class, name=None) -> None:
+def serve(user_class, through=None) -> None:
     """
     Add an instance of a user-defined class to Nurse's services catalog.
+    By default, a dependency is registered for its concrete type, but an interface can be provided.
+
+    :param user_class: User-defined class instance
+    :param through: Optional name to define specific access key for given user_class
     """
-    name = name or user_class.__class__
-    ServiceCatalog.get_instance().catalogue[name] = user_class
+    through = through or user_class.__class__
+    ServiceCatalog.get_instance().services[through] = user_class
