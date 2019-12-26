@@ -1,3 +1,4 @@
+import inspect
 from .service_catalog import ServiceCatalog
 
 
@@ -43,7 +44,13 @@ def serve(user_class, through=None) -> None:
     By default, a dependency is registered for its concrete type, but an interface can be provided.
 
     :param user_class: User-defined class instance
-    :param through: Optional name to define specific access key for given user_class
+    :param through: An interface used to access the user class
+                   (must be a direct or indirect parent class)
     """
+
     through = through or user_class.__class__
+
+    if not issubclass(user_class.__class__, through):
+        raise ValueError(f"Class {user_class} must be a subclass of {through}.")
+
     ServiceCatalog.get_instance().services[through] = user_class

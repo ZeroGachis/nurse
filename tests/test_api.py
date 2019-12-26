@@ -1,4 +1,5 @@
 import nurse
+import pytest
 
 
 class TestServe:
@@ -37,3 +38,17 @@ class TestServe:
 
         game = Game()
         assert game.player.name == "Igor"
+
+    def test_cannot_serve_a_dependency_if_it_does_not_subclass_the_provided_interface(self):
+        class User:
+            @property
+            def name(self):
+                return "Leroy Jenkins"
+
+        class Animal:
+            @property
+            def name(self):
+                return "Miaouss"
+
+        with pytest.raises(ValueError) as ctx:
+            nurse.serve(Animal(), through=User)
