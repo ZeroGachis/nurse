@@ -40,12 +40,12 @@ pipeline {
       post {
         always {
           junit '**/reports/**/*.xml'
-          sh 'rm -rf ${SDK_CONTENT_FOLDER}/reports/*'
+          sh 'rm -rf reports/*'
         }
       }
       steps {
-          sh 'mkdir -p "${SDK_CONTENT_FOLDER}/reports"'
-          sh 'docker run --workdir /home/src/${SERVICE_NAME}/ --mount type=bind,source="$(pwd)/${SDK_CONTENT_FOLDER}/reports",target=/home/src/${SERVICE_NAME}/reports ${SDK_DOCKER_TESTS_IMAGE} pytest --verbose --junit-xml reports/unit_tests_results.xml ${SDK_ROOT_FOLDER}'
+          sh 'mkdir -p "reports"'
+          sh 'docker run --workdir /home/src/${LIB_NAME}/ --mount type=bind,source="$(pwd)/reports",target=/home/src/${LIB_NAME}/reports ${LIB_NAME} pytest --verbose --junit-xml reports/unit_tests_results.xml'
       }
     }
     stage('PyPi Deploy') {
