@@ -105,6 +105,19 @@ to any of your class.
     game.summon_monster()
     # Grrr!
 
+Or in any method
+
+.. code:: python3
+
+    import nurse
+
+    @nurse.inject('enemy')
+    def summon_monster(enemy: Animal):
+        print(self.enemy.roar)
+
+    summon_monster()
+    # Grrr!
+
 
 License
 ~~~~~~~
