@@ -1,5 +1,3 @@
-import inspect
-
 from nurse.exceptions import DependencyError
 from .service_catalog import ServiceCatalog
 

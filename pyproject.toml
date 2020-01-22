@@ -12,6 +12,7 @@ keywords = ["dependency", "injection"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
+flake8 = "^3.7.9"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"

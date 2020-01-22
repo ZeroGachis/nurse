@@ -54,7 +54,7 @@ class TestServe:
             def name(self):
                 return "Miaouss"
 
-        with pytest.raises(ValueError) as ctx:
+        with pytest.raises(ValueError):
             nurse.serve(Animal(), through=User)
 
 

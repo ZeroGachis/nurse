@@ -13,7 +13,7 @@ class ServiceCatalog:
         self.services.clear()
 
     @classmethod
-    def get_instance(cls) -> "Services":
+    def get_instance(cls) -> "ServiceCatalog":
         if cls.instance is None:
             cls.instance = cls()
 
