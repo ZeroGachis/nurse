@@ -9,9 +9,7 @@ pipeline {
   }
   stages {
     stage('Nofity release start') {
-      when {
-        branch 'master'
-      }
+      when { branch 'master' }
       steps {
         slackSend message: "Start deploying *${LIB_NAME}.*\n More info at: ${env.RUN_DISPLAY_URL}"
       }
@@ -49,11 +47,9 @@ pipeline {
       }
     }
     stage('PyPi Deploy') {
-      when {
-        branch 'master'
-      }
+      when { branch 'master' }
       steps {
-        sh 'docker run --workdir /home/src/${LIB_NAME}/ ${LIB_NAME} poetry publish -u ${PYPI_USER} -p ${PYPI_PWD}'
+        sh 'docker run --workdir /home/src/${LIB_NAME}/ ${LIB_NAME} poetry publish --build -u ${PYPI_USER} -p ${PYPI_PWD}'
       }
     }
   }
