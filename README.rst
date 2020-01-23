@@ -88,7 +88,7 @@ to any of your class.
 
     import nurse
 
-    @nurse.inject
+    @nurse.inject("player")
     class Game:
         player: Player
         enemy: Animal
@@ -103,6 +103,19 @@ to any of your class.
     game.welcome_hero()
     # Welcome Leeroy Jenkins !
     game.summon_monster()
+    # Grrr!
+
+Or in any method
+
+.. code:: python3
+
+    import nurse
+
+    @nurse.inject('enemy')
+    def summon_monster(enemy: Animal):
+        print(self.enemy.roar)
+
+    summon_monster()
     # Grrr!
 
 

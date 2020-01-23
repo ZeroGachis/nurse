@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+
+  nurse:
+    build:
+      context: .
+      args:
+        - REQUIREMENTS=dev
+    tty: true
+    working_dir: /home/src/nurse
+    volumes:
+      - ./.:/home/src/nurse
