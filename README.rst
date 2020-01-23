@@ -88,7 +88,7 @@ to any of your class.
 
     import nurse
 
-    @nurse.inject
+    @nurse.inject("player")
     class Game:
         player: Player
         enemy: Animal

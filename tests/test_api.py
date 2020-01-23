@@ -16,7 +16,7 @@ class TestServe:
 
         nurse.serve(User())
 
-        @nurse.inject
+        @nurse.inject("player")
         class Game:
             player: User
 
@@ -36,7 +36,7 @@ class TestServe:
 
         nurse.serve(Cheater(), through=User)
 
-        @nurse.inject
+        @nurse.inject("player")
         class Game:
             player: User
 
