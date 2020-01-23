@@ -1,0 +1,4 @@
+[flake8]
+exclude = .git,*.pyc
+max-line-length = 120
+ignore = F403

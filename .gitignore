@@ -10,5 +10,10 @@ pip-wheel-metadata/
 # Python
 __pycache__/
 
+# Pycharm user-settings cached files
+.idea/*
+
+# Pycharm shared settings
+!.idea/runConfigurations
 
         
