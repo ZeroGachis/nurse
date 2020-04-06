@@ -113,7 +113,7 @@ Or in any method
 
     @nurse.inject('enemy')
     def summon_monster(enemy: Animal):
-        print(self.enemy.roar)
+        print(enemy.roar)
 
     summon_monster()
     # Grrr!
