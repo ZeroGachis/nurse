@@ -77,7 +77,7 @@ via one of their parent class.
 
         @property
         def roar(self) -> str:
-            return "Grrr!"
+            return "Grrr! 🦁"
 
     nurse.serve(AngryAnimal(), through=Animal)
 
@@ -85,8 +85,6 @@ Once you filled-in the service catalog with your different components, your can 
 to any of your class.
 
 .. code:: python3
-
-    import nurse
 
     @nurse.inject("player")
     class Game:
@@ -103,20 +101,33 @@ to any of your class.
     game.welcome_hero()
     # Welcome Leeroy Jenkins !
     game.summon_monster()
-    # Grrr!
+    # Grrr! 🦁
 
-Or in any method
+
+Or in any function
 
 .. code:: python3
-
-    import nurse
 
     @nurse.inject('enemy')
     def summon_monster(enemy: Animal):
         print(enemy.roar)
 
     summon_monster()
-    # Grrr!
+    # Grrr! 🦁
+
+
+And it works with async function as well !
+
+.. code:: python3
+
+    import asyncio
+
+    @nurse.inject('enemy')
+    async def summon_monster(enemy: Animal):
+        print(enemy.roar)
+
+    asyncio.run(summon_monster())
+    # Grrr! 🦁
 
 
 License
