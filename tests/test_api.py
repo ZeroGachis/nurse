@@ -122,3 +122,19 @@ class TestInjectMethod:
         res = asyncio.run(foo())
 
         assert res == "Leroy Jenkins"
+
+
+class TestGet:
+
+    def setup(self):
+        nurse.clear()
+
+    def test_retrieve_service(self):
+        nurse.serve(ServiceDependency("Leroy Jenkins"))
+
+        service = nurse.get(ServiceDependency)
+        assert service.get_name() == "Leroy Jenkins"
+
+    def test_returns_none_if_service_is_not_registered(self):
+        service = nurse.get(ServiceDependency)
+        assert service is None

@@ -130,6 +130,15 @@ And it works with async function as well !
     # Grrr! 🦁
 
 
+Finally, you can also retrieve a service without using a decorator
+
+.. code:: python3
+
+    enemy = nurse.get(Animal)
+    print(enemy.roar)
+    # Grrr! 🦁
+
+
 License
 ~~~~~~~
 

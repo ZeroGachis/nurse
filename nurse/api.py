@@ -29,6 +29,19 @@ def clear() -> None:
     ServiceCatalog.get_instance().clear()
 
 
+def get(service_type):
+    """
+    Retrieve a service from the service catalog.
+
+    :Example:
+
+    nurse.serve(SSHClient())
+
+    ssh_client = nurse.get(SSHClient)
+    """
+    return ServiceCatalog.get_instance()._services.get(service_type)
+
+
 def inject(*items_to_inject: List[str]):
     """
     A decorator that injects dependencies into every instances of a user-defined class or method
@@ -54,6 +67,14 @@ def inject(*items_to_inject: List[str]):
 
     nurse.serve(SSHClient())
     send()
+
+
+    @nurse.inject("client")
+    async def send(client: SSHClient):
+        await client.send("Hello World !")
+
+    nurse.serve(SSHClient())
+    asyncio.run(send())
     """
 
     def decorator(decorated):
