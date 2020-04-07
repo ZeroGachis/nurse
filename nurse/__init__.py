@@ -1,4 +1,4 @@
-from nurse.api import inject, serve, clear
+from nurse.api import clear, get, inject, serve
 
 __version__ = "0.4.0"
-__all__ = ['inject', 'serve', 'clear']
+__all__ = ["clear", "get", "inject", "serve"]

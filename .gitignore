@@ -1,6 +1,3 @@
-# IDE
-.vscode/*
-
 # Build tools
 env/
 dist/
@@ -10,10 +7,16 @@ pip-wheel-metadata/
 # Python
 __pycache__/
 
-# Pycharm user-settings cached files
-.idea/*
+# Tests
+.pytest_cache
 
+
+# ----- IDE -----
+
+## PyCharm
+.idea/*
 # Pycharm shared settings
 !.idea/runConfigurations
 
-        
+## VS Code
+.vscode/*
