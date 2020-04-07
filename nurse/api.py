@@ -86,7 +86,7 @@ def inject(*items_to_inject: List[str]):
         elif isfunction(decorated):
             return inject_function(decorated, service_catalog, items_to_inject)
 
-        raise NotImplementedError("user-defined class or function can be injected.")
+        raise NotImplementedError("user-defined class or function can't be injected.")
 
     return decorator
 
