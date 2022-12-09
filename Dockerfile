@@ -1,10 +1,10 @@
-FROM python:3.7-stretch
+FROM python:3.9-bullseye
 
 RUN \
     apt-get -y update \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --upgrade pip==20.0.1 \
+RUN pip3 install --upgrade pip \
     && pip3 install -U setuptools
 
 RUN pip install poetry
@@ -18,7 +18,7 @@ ARG REQUIREMENTS=common
 ENV REQUIREMENTS $REQUIREMENTS
 RUN mkdir requirements
 RUN poetry export -f requirements.txt --without-hashes > requirements/$REQUIREMENTS.txt
-RUN poetry export -f requirements.txt --without-hashes --dev > requirements/dev.txt
+RUN poetry export -f requirements.txt --without-hashes --with dev > requirements/dev.txt
 
 RUN pip3 install -r requirements/$REQUIREMENTS.txt
 
