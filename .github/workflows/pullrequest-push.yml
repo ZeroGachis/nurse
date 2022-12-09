@@ -1,0 +1,60 @@
+name: "PullRequest-Push"
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    uses: ZeroGachis/.github/.github/workflows/build-image.yml@1
+    with:
+      image_name: nurse
+      dockerfile_context: .
+      regitry_url: ghcr.io
+      build-args: |
+        REQUIREMENTS=dev
+    secrets: inherit
+
+  static-metrics:
+    needs: 
+      [
+        build, 
+      ]
+    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@1
+    with:
+      image_url: ${{ needs.build.outputs.image-url }}
+      workdir: /home/src/nurse
+      run_command: |
+        flake8 .
+    secrets: inherit
+
+  unit-tests:
+    needs: 
+      [
+        build, 
+      ]
+    uses: ZeroGachis/.github/.github/workflows/run-docker-with-db.yml@1
+    with:
+      image_url: ${{ needs.build.outputs.image-url }}
+      workdir: /home/src/nurse
+      run_command: |
+        pytest --verbose
+      enable_test_report: false
+    secrets: inherit
+
+  detroy:
+    if: always()
+    needs:
+      [
+        build,
+        unit-tests,
+        static-metrics,
+      ]
+    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@1
+    with:
+      image_name: nurse
+      image_version: ${{ needs.build.outputs.image-version }}
+    secrets: inherit

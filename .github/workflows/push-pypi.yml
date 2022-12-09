@@ -1,0 +1,33 @@
+name: 'Push-Pypi'
+
+on:
+  workflow_call:
+    inputs:
+      image_url:
+        required: true
+        type: string
+      workdir:
+        required: true
+        type: string
+      env_django_settings_module:
+        required: false
+        type: string
+      run_command:
+        required: true
+        type: string
+
+jobs:
+  run-docker:
+    runs-on: ubuntu-latest
+    container: 
+      image: ${{ inputs.image_url }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: run-command
+        working-directory: ${{ inputs.workdir }}
+        run: poetry publish --build -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PWD }} 
