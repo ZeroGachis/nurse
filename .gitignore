@@ -20,3 +20,6 @@ __pycache__/
 
 ## VS Code
 .vscode/*
+
+# Asdf
+.tool-versions
