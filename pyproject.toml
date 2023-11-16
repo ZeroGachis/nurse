@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nurse"
-version = "0.5.0"
+version = "0.5.1"
 description = "A thoughtful dependency injection framework 💉"
 authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
 
@@ -11,10 +11,10 @@ homepage = "https://github.com/ZeroGachis/nurse"
 keywords = ["dependency", "injection"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-flake8 = "^3.7.9"
+python = "^3.9"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.1.0"
 pytest = "^3.0"
 black = { version = "*", allow-prereleases = true }
 
