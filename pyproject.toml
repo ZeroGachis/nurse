@@ -14,7 +14,7 @@ keywords = ["dependency", "injection"]
 python = "^3.9"
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^6.1.0"
+flake8 = "^7.0.0"
 pytest = "^3.0"
 black = { version = "*", allow-prereleases = true }
 
