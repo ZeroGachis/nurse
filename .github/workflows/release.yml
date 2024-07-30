@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: ZeroGachis/.github/.github/workflows/build-image.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/build-image.yml@v2
     with:
       image_name: nurse
       dockerfile_context: .
@@ -21,7 +21,7 @@ jobs:
       [
         build, 
       ]
-    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v2
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       workdir: /home/src/nurse
@@ -34,7 +34,7 @@ jobs:
       [
         build, 
       ]
-    uses: ZeroGachis/.github/.github/workflows/run-docker-with-db.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/run-docker-with-db.yml@v2
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       workdir: /home/src/nurse
@@ -50,7 +50,7 @@ jobs:
         unit-tests,
         static-metrics,
       ]
-    uses: ZeroGachis/.github/.github/workflows/push-pypi.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/push-pypi.yml@v2
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       workdir: /home/src/nurse
@@ -64,7 +64,7 @@ jobs:
         unit-tests,
         static-metrics,
       ]
-    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v2
     with:
       image_name: nurse
       image_version: ${{ needs.build.outputs.image-version }}
