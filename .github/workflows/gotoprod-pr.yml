@@ -1,0 +1,11 @@
+
+name: Go-To-Prod PR
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  call-gotoprod-pr-workflow:
+    uses: ZeroGachis/.github/.github/workflows/create-gotoprod-pr.yml@v4
