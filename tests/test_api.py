@@ -1,3 +1,4 @@
+from unittest import TestCase
 import nurse
 import pytest
 
@@ -5,8 +6,9 @@ from nurse.exceptions import DependencyError
 import asyncio
 
 
-class TestServe:
-    def setup(self):
+class TestServe(TestCase):
+    def tearDown(self):
+        super().tearDown()
         nurse.clear()
 
     def test_can_inject_a_dependency(self):
@@ -44,7 +46,9 @@ class TestServe:
         game = Game()
         assert game.player.name == "Igor"
 
-    def test_cannot_serve_a_dependency_if_it_does_not_subclass_the_provided_interface(self):
+    def test_cannot_serve_a_dependency_if_it_does_not_subclass_the_provided_interface(
+        self,
+    ):
         class User:
             @property
             def name(self):
@@ -67,8 +71,9 @@ class ServiceDependency:
         return self.name
 
 
-class TestInjectMethod:
-    def setup(self):
+class TestInjectMethod(TestCase):
+    def tearDown(self):
+        super().tearDown()
         nurse.clear()
 
     def test_methods_with_only_dependency_args(self):
@@ -95,8 +100,7 @@ class TestInjectMethod:
             pass
 
         with pytest.raises(
-            DependencyError,
-            message="Args `service` must be typed to be injected."
+            DependencyError, match="Args `service` must be typed to be injected."
         ):
             foo()
 
@@ -107,12 +111,11 @@ class TestInjectMethod:
 
         with pytest.raises(
             DependencyError,
-            message="Dependency `ServiceDependency` for `service` arg was not found."
+            match="Dependency `ServiceDependency` for `service` was not found.",
         ):
             foo()
 
     def test_async_method(self):
-
         @nurse.inject("service")
         async def foo(service: ServiceDependency):
             return service.get_name()
@@ -124,9 +127,9 @@ class TestInjectMethod:
         assert res == "Leroy Jenkins"
 
 
-class TestGet:
-
-    def setup(self):
+class TestGet(TestCase):
+    def tearDown(self):
+        super().tearDown()
         nurse.clear()
 
     def test_retrieve_service(self):

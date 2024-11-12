@@ -6,41 +6,47 @@ on:
     types: [published]
 
 jobs:
+  releasetag:
+    uses: ZeroGachis/.github/.github/workflows/releasetag.yml@v4
+
   build:
-    uses: ZeroGachis/.github/.github/workflows/build-image.yml@v1
+    needs: releasetag
+    uses: ZeroGachis/.github/.github/workflows/build-image.yml@v4
     with:
       image_name: nurse
       dockerfile_context: .
+      vault_enabled: false
+      tailscale_enabled: false
       regitry_url: ghcr.io
-      build-args: |
-        REQUIREMENTS=dev
     secrets: inherit
 
   static-metrics:
-    needs: 
+    needs:
       [
-        build, 
+        build,
       ]
-    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v4
     with:
       image_url: ${{ needs.build.outputs.image-url }}
-      workdir: /home/src/nurse
+      tailscale_enabled: false
+      vault_enabled: false
+      workdir: /app
       run_command: |
-        flake8 .
+        ruff check --diff ./
+        ruff format --check --diff ./
     secrets: inherit
 
   unit-tests:
-    needs: 
+    needs:
       [
-        build, 
+        build,
       ]
-    uses: ZeroGachis/.github/.github/workflows/run-docker-with-db.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/run-pytest.yml@v4
     with:
       image_url: ${{ needs.build.outputs.image-url }}
-      workdir: /home/src/nurse
-      run_command: |
-        pytest --verbose
-      enable_test_report: false
+      workdir: /app
+      directory_to_test: tests/
+      env_django_settings_module: todo-make-this-optional
     secrets: inherit
 
   push:
@@ -60,6 +66,7 @@ jobs:
     if: always()
     needs:
       [
+        releasetag,
         build,
         unit-tests,
         static-metrics,
