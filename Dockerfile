@@ -1,26 +1,14 @@
-FROM python:3.11-bookworm
+FROM 007065811408.dkr.ecr.eu-west-3.amazonaws.com/python-3-11:1
 
-RUN \
-    apt-get -y update \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-RUN pip3 install --upgrade pip \
-    && pip3 install -U setuptools
+COPY pyproject.toml poetry.lock poetry.toml ./
 
-RUN pip install poetry
+# Poetry complains if no README.md exists
+RUN touch README.md
 
-COPY poetry.lock /home/src/nurse/poetry.lock
-COPY pyproject.toml /home/src/nurse/pyproject.toml
+RUN POETRY_NO_INTERACTION=1 poetry install
 
-WORKDIR /home/src/nurse
+COPY . .
 
-ARG REQUIREMENTS=common
-ENV REQUIREMENTS $REQUIREMENTS
-RUN mkdir requirements
-RUN poetry export -f requirements.txt --without-hashes > requirements/$REQUIREMENTS.txt
-RUN poetry export -f requirements.txt --without-hashes --with dev > requirements/dev.txt
-
-RUN pip3 install -r requirements/$REQUIREMENTS.txt
-
-COPY . /home/src/nurse
 CMD ["bash"]

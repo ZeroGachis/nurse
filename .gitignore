@@ -3,6 +3,7 @@ env/
 dist/
 nurse.egg-info/
 pip-wheel-metadata/
+.venv/
 
 # Python
 __pycache__/
@@ -23,3 +24,10 @@ __pycache__/
 
 # Asdf
 .tool-versions
+
+# Dev env variables
+.env
+
+# Coverage
+.coverage
+reports/

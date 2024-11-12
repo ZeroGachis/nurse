@@ -137,7 +137,7 @@ def get_service(service_catalog: ServiceCatalog, decorated_obj, param_to_inject:
     service = service_catalog._services.get(service_type)
     if not service:
         raise DependencyError(
-            f"Dependency `{service_type}` for `{param_to_inject}` was not found."
+            f"Dependency `{service_type.__name__}` for `{param_to_inject}` was not found."
         )
 
     return service
