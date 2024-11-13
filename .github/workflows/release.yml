@@ -59,7 +59,7 @@ jobs:
     uses: ZeroGachis/.github/.github/workflows/push-pypi.yml@v1
     with:
       image_url: ${{ needs.build.outputs.image-url }}
-      workdir: /home/src/nurse
+      workdir: /app
     secrets: inherit
 
   detroy:
