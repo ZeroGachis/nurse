@@ -2,77 +2,19 @@ name: "Release"
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
-  releasetag:
-    uses: ZeroGachis/.github/.github/workflows/releasetag.yml@v4
-
-  build:
-    needs: releasetag
-    uses: ZeroGachis/.github/.github/workflows/build-image.yml@v4
+  github-release:
+    uses: ZeroGachis/.github/.github/workflows/gh-release-please.yml@v4
     with:
-      image_name: nurse
-      dockerfile_context: .
-      vault_enabled: false
-      tailscale_enabled: false
-      regitry_url: ghcr.io
-    secrets: inherit
-
-  static-metrics:
-    needs:
-      [
-        build,
-      ]
-    uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v4
+        major_and_minor_tags: false
+  publish:
+    needs: github-release
+    if: ${{ needs.github-release.outputs.release_created == 'true' }}
+    uses: ZeroGachis/.github/.github/workflows/python-publish.yml@v4
     with:
-      image_url: ${{ needs.build.outputs.image-url }}
-      tailscale_enabled: false
-      vault_enabled: false
-      workdir: /app
-      run_command: |
-        ruff check --diff ./
-        ruff format --check --diff ./
-    secrets: inherit
-
-  unit-tests:
-    needs:
-      [
-        build,
-      ]
-    uses: ZeroGachis/.github/.github/workflows/run-pytest.yml@v4
-    with:
-      image_url: ${{ needs.build.outputs.image-url }}
-      workdir: /app
-      directory_to_test: tests/
-      env_django_settings_module: todo-make-this-optional
-    secrets: inherit
-
-  push:
-    needs: 
-      [
-        build, 
-        unit-tests,
-        static-metrics,
-      ]
-    uses: ZeroGachis/.github/.github/workflows/push-pypi.yml@v1
-    with:
-      image_url: ${{ needs.build.outputs.image-url }}
-      workdir: /app
-    secrets: inherit
-
-  detroy:
-    if: always()
-    needs:
-      [
-        releasetag,
-        build,
-        unit-tests,
-        static-metrics,
-      ]
-    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
-    with:
-      image_name: nurse
-      image_version: ${{ needs.build.outputs.image-version }}
-    secrets: inherit
+      python_version: "3.12"
+      environment_name: main
