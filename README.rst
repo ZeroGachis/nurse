@@ -86,7 +86,7 @@ to any of your class.
 
 .. code:: python3
 
-    @nurse.inject("player")
+    @dataclass
     class Game:
         player: Player
         enemy: Animal
@@ -97,45 +97,13 @@ to any of your class.
         def summon_monster(self):
             print(self.enemy.roar)
 
-    Game = Game()
+    player = nurse.get(Player)
+    animal = nurse.get(Animal)
+    game = Game(player=player, animal=animal)
+
     game.welcome_hero()
     # Welcome Leeroy Jenkins !
     game.summon_monster()
-    # Grrr! 🦁
-
-
-Or in any function
-
-.. code:: python3
-
-    @nurse.inject('enemy')
-    def summon_monster(enemy: Animal):
-        print(enemy.roar)
-
-    summon_monster()
-    # Grrr! 🦁
-
-
-And it works with async function as well !
-
-.. code:: python3
-
-    import asyncio
-
-    @nurse.inject('enemy')
-    async def summon_monster(enemy: Animal):
-        print(enemy.roar)
-
-    asyncio.run(summon_monster())
-    # Grrr! 🦁
-
-
-Finally, you can also retrieve a service without using a decorator
-
-.. code:: python3
-
-    enemy = nurse.get(Animal)
-    print(enemy.roar)
     # Grrr! 🦁
 
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nurse"
-version = "0.5.1"
+version = "0.6.0"
 description = "A thoughtful dependency injection framework"
 authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
 
@@ -47,8 +47,6 @@ venvPath = "."
 venv = ".venv"
 typeCheckingMode = "strict"
 include = ["nurse/**"]
-exclude = [
-    "**/__pycache__",
-]
+exclude = ["**/__pycache__"]
 
 executionEnvironments = [{ root = "nurse" }]
