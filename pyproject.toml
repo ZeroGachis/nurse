@@ -19,6 +19,7 @@ pytest = "^8.0"
 ruff = "^0.7.3"
 pre-commit = "^4.0.1"
 pytest-cov = "^6.0.0"
+pyright = "^1.1.388"
 
 [build-system]
 requires = ["poetry-core"]
@@ -39,3 +40,15 @@ line-length = 88
 # It would be preferable to use python's standard "project.requires-python"
 # but poetry does not comply with it.
 target-version = "py311"
+
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "strict"
+include = ["nurse/**"]
+exclude = [
+    "**/__pycache__",
+]
+
+executionEnvironments = [{ root = "nurse" }]

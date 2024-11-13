@@ -13,3 +13,8 @@ repos:
         entry: poetry run ruff format
         language: system
         types: [file, python]
+      - id: pyright
+        name: pyright
+        entry: poetry run pyright
+        language: system
+        types: [file, python]
