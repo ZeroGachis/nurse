@@ -62,7 +62,7 @@ jobs:
         unit-tests,
         static-metrics,
       ]
-    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v3
     with:
       image_name: nurse
       image_version: ${{ needs.build.outputs.image-version }}
