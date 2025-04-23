@@ -9,12 +9,20 @@ on:
 jobs:
   github-release:
     uses: ZeroGachis/.github/.github/workflows/gh-release-please.yml@v4
+    permissions:
+      contents: write
+      pull-requests: write
     with:
         major_and_minor_tags: false
+
   publish:
     needs: github-release
     if: ${{ needs.github-release.outputs.release_created == 'true' }}
     uses: ZeroGachis/.github/.github/workflows/python-publish.yml@v4
+    permissions:
+      contents: write
+      packages: read
+      id-token: write
     with:
       python_version: "3.12"
       environment_name: main

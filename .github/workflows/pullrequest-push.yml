@@ -11,10 +11,19 @@ jobs:
 
   releasetag:
     uses: ZeroGachis/.github/.github/workflows/releasetag.yml@v4
+    permissions:
+      contents: read
 
   build:
     needs: releasetag
     uses: ZeroGachis/.github/.github/workflows/build-image.yml@v4
+      actions: read
+      checks: write
+      contents: read
+      id-token: write
+      packages: write
+      pull-requests: write
+      security-events: write
     with:
       image_name: nurse
       dockerfile_context: .
@@ -29,6 +38,12 @@ jobs:
         build,
       ]
     uses: ZeroGachis/.github/.github/workflows/run-docker.yml@v4
+    permissions:
+      contents: read
+      id-token: write
+      packages: read
+      actions: write
+      checks: write
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       tailscale_enabled: false
@@ -39,13 +54,19 @@ jobs:
         ruff format --check --diff ./
     secrets: inherit
 
-
   unit-tests:
     needs:
       [
         build,
       ]
     uses: ZeroGachis/.github/.github/workflows/run-pytest.yml@v4
+    permissions:
+        actions: write
+        checks: write
+        contents: write
+        id-token: write
+        packages: read
+        pull-requests: write
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       workdir: /app
@@ -53,7 +74,7 @@ jobs:
       env_django_settings_module: todo-make-this-optional
     secrets: inherit
 
-  detroy:
+  destroy:
     if: always()
     needs:
       [
@@ -63,6 +84,10 @@ jobs:
         static-metrics,
       ]
     uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     with:
       image_name: nurse
       image_version: ${{ needs.build.outputs.image-version }}
