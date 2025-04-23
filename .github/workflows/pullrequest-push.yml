@@ -17,6 +17,7 @@ jobs:
   build:
     needs: releasetag
     uses: ZeroGachis/.github/.github/workflows/build-image.yml@v4
+    permissions:
       actions: read
       checks: write
       contents: read
