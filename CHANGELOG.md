@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.1](https://github.com/ZeroGachis/nurse/compare/1.0.0...1.0.1) (2025-04-24)
+
+
+### Bug Fixes
+
+* typo in workflow ([0dffbc2](https://github.com/ZeroGachis/nurse/commit/0dffbc2283b5f04af95697484e7b3548479ce9a0))
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency ruff to ^0.11.0 ([276127a](https://github.com/ZeroGachis/nurse/commit/276127aa59689aba3b926c9dead6eb3011ec1bf1))
+
+
+### Continuous Integration
+
+* add permissions on github actions ([8ed1f56](https://github.com/ZeroGachis/nurse/commit/8ed1f56a6887b324abecc30696e692632dc8f5e1))
+
 ## [1.0.0](https://github.com/ZeroGachis/nurse/compare/v0.5.1...1.0.0) (2024-11-13)
 
 
