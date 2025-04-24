@@ -84,7 +84,7 @@ jobs:
         unit-tests,
         static-metrics,
       ]
-    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
+    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v3
     permissions:
       contents: read
       id-token: write
