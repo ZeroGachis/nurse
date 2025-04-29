@@ -3,16 +3,13 @@ name = "nurse"
 version = "1.0.1"
 description = "A thoughtful dependency injection framework"
 authors = ["ducdetronquito <g.paulet@zero-gachis.com>"]
-
 readme = "README.rst"
-
 repository = "https://github.com/ZeroGachis/nurse"
 homepage = "https://github.com/ZeroGachis/nurse"
 keywords = ["dependency", "injection"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-
+python = "^3.12"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
@@ -39,8 +36,7 @@ source = ["nurse"]
 line-length = 88
 # It would be preferable to use python's standard "project.requires-python"
 # but poetry does not comply with it.
-target-version = "py311"
-
+target-version = "py312"
 
 [tool.pyright]
 venvPath = "."
