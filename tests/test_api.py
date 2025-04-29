@@ -1,31 +1,28 @@
-from dataclasses import dataclass
 from unittest import TestCase
 import nurse
 import pytest
 
 
-class TestServe(TestCase):
+class TestNurse(TestCase):
     def tearDown(self):
         super().tearDown()
         nurse.clear()
 
-    def test_can_inject_a_dependency(self):
+    def test_singleton_dependency(self):
         class User:
             @property
             def name(self):
                 return "Leroy Jenkins"
 
-        nurse.serve(User())
+        nurse.serve(User, singleton=User())
 
-        @dataclass
-        class Game:
-            player: User
+        user1 = nurse.get(User)
+        user2 = nurse.get(User)
+        assert user1.name == "Leroy Jenkins"
+        assert user2.name == "Leroy Jenkins"
+        assert user1 is user2
 
-        user = nurse.get(User)
-        game = Game(user)
-        assert game.player.name == "Leroy Jenkins"
-
-    def test_can_inject_a_dependency_through_an_interface(self):
+    def test_singleton_subclass_dependency(self):
         class User:
             @property
             def name(self) -> str:
@@ -36,53 +33,61 @@ class TestServe(TestCase):
             def name(self) -> str:
                 return "Igor"
 
-        nurse.serve(Cheater(), through=User)
+        nurse.serve(User, singleton=Cheater())
 
-        @dataclass
-        class Game:
-            player: User
+        user1 = nurse.get(User)
+        user2 = nurse.get(User)
+        assert user1.name == "Igor"
+        assert user2.name == "Igor"
+        assert user1 is user2
 
-        user = nurse.get(User)
-        game = Game(user)
-        assert game.player.name == "Igor"
-
-    def test_cannot_serve_a_dependency_if_it_does_not_subclass_the_provided_interface(
-        self,
-    ):
+    def test_factory(self):
         class User:
             @property
             def name(self) -> str:
                 return "Leroy Jenkins"
 
-        class Animal:
+        nurse.serve(User, factory=User)
+
+        user1 = nurse.get(User)
+        user2 = nurse.get(User)
+        assert user1.name == "Leroy Jenkins"
+        assert user2.name == "Leroy Jenkins"
+        assert user1 is not user2
+
+    def test_factory_with_subclass(self):
+        class User:
             @property
             def name(self) -> str:
-                return "Miaouss"
+                return "Leroy Jenkins"
 
-        with pytest.raises(ValueError):
-            nurse.serve(Animal(), through=User)
+        class Cheater(User):
+            @property
+            def name(self) -> str:
+                return "Igor"
 
+        nurse.serve(User, factory=Cheater)
 
-class ServiceDependency:
-    def __init__(self, name: str):
-        self.name = name
+        user1 = nurse.get(User)
+        user2 = nurse.get(User)
+        assert user1.name == "Igor"
+        assert user2.name == "Igor"
+        assert user1 is not user2
 
-    def get_name(self) -> str:
-        return self.name
+    def test_raise_error_when_service_is_not_registered(self):
+        class User:
+            @property
+            def name(self) -> str:
+                return "Leroy Jenkins"
 
-
-class TestGet(TestCase):
-    def tearDown(self):
-        super().tearDown()
-        nurse.clear()
-
-    def test_retrieve_service(self):
-        nurse.serve(ServiceDependency("Leroy Jenkins"))
-
-        service = nurse.get(ServiceDependency)
-        assert service is not None
-        assert service.get_name() == "Leroy Jenkins"
-
-    def test_returns_none_if_service_is_not_registered(self):
         with pytest.raises(nurse.ServiceNotFound):
-            nurse.get(ServiceDependency)
+            nurse.get(User)
+
+    def test_must_serve_either_a_singleton_or_a_factory(self):
+        class User:
+            @property
+            def name(self):
+                return "Leroy Jenkins"
+
+        with pytest.raises(nurse.NurseError):
+            nurse.serve(User, singleton=None, factory=None)

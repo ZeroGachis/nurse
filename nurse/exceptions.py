@@ -1,2 +1,6 @@
-class ServiceNotFound(Exception):
+class NurseError(Exception):
+    pass
+
+
+class ServiceNotFound(NurseError):
     pass
