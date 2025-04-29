@@ -1,7 +1,35 @@
+[settings]
+# Mise should ignore "idiomatic version files"
+# and consider this toml file as the only source of truth
+# Cf: https://mise.jdx.dev/configuration.html#idiomatic-version-files
+legacy_version_file = false
+python.compile = true
+
 [tools]
-python = "3.11"
-poetry = "latest"
+python = "3.12"
+poetry = "1.8"
+"aqua:aws/aws-cli" = "latest"
 
 [env]
-_.file = '../../.env'
-_.python.venv = { path = "../../.venv", create = false }
+_.file = '.env'
+_.python.venv = { path = ".venv", create = false }
+
+[tasks.lint]
+description = "🐍 Format & Lint your Python code"
+run = ["ruff format", "ruff check"]
+
+[tasks.aws_login]
+description = "🔐 Login to AWS SSO"
+run = "aws sso login"
+
+[tasks.refresh_private_repositories_credentials]
+description = "🔐 Refresh credentials to access private repositories on CodeArtifact (you must be logged on AWS SSO first)"
+run = "./scripts/setup_private_repo_credentials.sh"
+
+[tasks.test]
+description = "🐍 Run tests"
+run = "pytest -s"
+
+[tasks.typecheck]
+description = "🐍 Typecheck your Python code"
+run = ["ruff check", "pyright"]
