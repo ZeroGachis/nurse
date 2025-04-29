@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 
 class ServiceCatalog:
@@ -10,7 +10,7 @@ class ServiceCatalog:
     instance: Optional["ServiceCatalog"] = None
 
     def __init__(self) -> None:
-        self.services = dict[Any, Any]()
+        self.services = dict[str, Callable[[], Any]]()
 
     def clear(self) -> None:
         self.services.clear()

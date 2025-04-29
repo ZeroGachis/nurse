@@ -61,7 +61,7 @@ filled-in generally at the startup of your application.
             return "Leeroy Jenkins"
 
     # Now, add it to nurse service catalog in order to use it later in your application
-    nurse.serve(Player())
+    nurse.serve(Player, singleton=Player())
 
 By default, dependencies are referenced by their concrete type, but you can also serve them
 via one of their parent class.
@@ -79,7 +79,7 @@ via one of their parent class.
         def roar(self) -> str:
             return "Grrr! 🦁"
 
-    nurse.serve(AngryAnimal(), through=Animal)
+    nurse.serve(Animal, singleton=AngryAnimal())
 
 Once you filled-in the service catalog with your different components, your can declare them as dependencies
 to any of your class.

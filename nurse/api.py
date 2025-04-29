@@ -1,33 +1,27 @@
 from .service_catalog import ServiceCatalog
-from typing import TypeVar
-from nurse.exceptions import ServiceNotFound
-
-TDependencyInterface = TypeVar("TDependencyInterface")
+from typing import Callable
+from nurse.exceptions import NurseError, ServiceNotFound
 
 
-def serve(
-    service_instance: TDependencyInterface,
-    through: type[TDependencyInterface] | None = None,
+def serve[T](
+    interface: type[T],
+    *,
+    factory: Callable[[], T] | None = None,
+    singleton: T | None = None,
 ) -> None:
     """
-    Add an instance of a user-defined class to Nurse's services catalog.
-    By default, a dependency is registered for its concrete type, but an interface can be provided.
-
-    :param user_class: User-defined class instance
-    :param through: An interface used to access the user class
-                   (must be a direct or indirect parent class)
+    Register a service to nurse's catalog.
     """
-    if through is not None:
-        _through = through
+
+    if factory is not None:
+        service_factory = factory
+    elif singleton is not None:
+        service_factory = lambda: singleton  # noqa:E731
     else:
-        _through = service_instance.__class__
+        raise NurseError("You must either provide `factory` or `singleton` parameter")
 
-    if not issubclass(service_instance.__class__, _through):
-        raise ValueError(
-            f"Service instance of type '{service_instance.__class__}' must be a subclass of {_through}."
-        )
-
-    ServiceCatalog.get_instance().services[_through] = service_instance
+    key = interface.__qualname__
+    ServiceCatalog.get_instance().services[key] = service_factory
 
 
 def clear() -> None:
@@ -37,7 +31,7 @@ def clear() -> None:
     ServiceCatalog.get_instance().clear()
 
 
-def get(service_instance_class: type[TDependencyInterface]) -> TDependencyInterface:
+def get[T](interface: type[T]) -> T:
     """
     Retrieve a service from the service catalog.
 
@@ -47,9 +41,8 @@ def get(service_instance_class: type[TDependencyInterface]) -> TDependencyInterf
 
     ssh_client = nurse.get(SSHClient)
     """
-    service = ServiceCatalog.get_instance().services.get(service_instance_class)
-    if service is None:
-        raise ServiceNotFound(
-            f"No service exists for '{service_instance_class.__class__}'"
-        )
-    return service
+    key = interface.__qualname__
+    service_factory = ServiceCatalog.get_instance().services.get(key)
+    if service_factory is None:
+        raise ServiceNotFound(f"No service exists for '{interface.__class__}'")
+    return service_factory()
