@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.0.0](https://github.com/ZeroGachis/nurse/compare/1.0.1...2.0.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Enable to serve singleton or factory
+
+### Features
+
+* Enable to serve singleton or factory ([bffde8e](https://github.com/ZeroGachis/nurse/commit/bffde8e8760372be12726d572e34c5f6184eb301))
+
+
+### Miscellaneous Chores
+
+* **ci:** Remove destroy step ([cddf0b8](https://github.com/ZeroGachis/nurse/commit/cddf0b8c6a889fc063e954aa36f7ff23ac4c779e))
+* **docker:** Fix git version ([790e881](https://github.com/ZeroGachis/nurse/commit/790e881a105a8cb6ec440b7c3ebd1bf88ef8b751))
+* **docker:** Fix lint issue ([115ba3d](https://github.com/ZeroGachis/nurse/commit/115ba3d8065a061f7c35bcfdaee1748cc88d38ba))
+* Remove unused docker-compose & Pycharm config ([1d02512](https://github.com/ZeroGachis/nurse/commit/1d0251219d929b70138e84fcab849fc893e5eeab))
+* Simplify README ([3c19d9d](https://github.com/ZeroGachis/nurse/commit/3c19d9d6af0859ffd3f2980687f2a1b5ad301aa6))
+* Update mise config and python dev dependencies ([67a8136](https://github.com/ZeroGachis/nurse/commit/67a8136a9545982b0e24879bc701524b3a54075d))
+* Upgrade dockerfile base image to use Python3.12 alpine slim ([74b70b8](https://github.com/ZeroGachis/nurse/commit/74b70b8c8d4562b2ff5b87a6e7e327d082d0fc58))
+
 ## [1.0.1](https://github.com/ZeroGachis/nurse/compare/1.0.0...1.0.1) (2025-04-24)
 
 
