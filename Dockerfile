@@ -2,7 +2,7 @@ FROM 007065811408.dkr.ecr.eu-west-3.amazonaws.com/python-3-12-alpine-slim:1
 
 WORKDIR /app
 
-RUN apk add --no-cache git=2.49.0-r0
+RUN apk add --no-cache git=2.47.2-r0
 
 COPY pyproject.toml poetry.lock poetry.toml ./
 
