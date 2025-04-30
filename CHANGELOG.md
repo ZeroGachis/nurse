@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/ZeroGachis/nurse/compare/2.0.0...2.0.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* Fix README reference in pyproject.toml file ([506f6c3](https://github.com/ZeroGachis/nurse/commit/506f6c3093a6a41475fadbd0ac66a84cd6849e9b))
+
 ## [2.0.0](https://github.com/ZeroGachis/nurse/compare/1.0.1...2.0.0) (2025-04-30)
 
 
