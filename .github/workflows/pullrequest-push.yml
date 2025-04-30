@@ -8,7 +8,6 @@ on:
       - "master"
 
 jobs:
-
   releasetag:
     uses: ZeroGachis/.github/.github/workflows/releasetag.yml@v4
     permissions:
@@ -62,34 +61,15 @@ jobs:
       ]
     uses: ZeroGachis/.github/.github/workflows/run-pytest.yml@v4
     permissions:
-        actions: write
-        checks: write
-        contents: write
-        id-token: write
-        packages: read
-        pull-requests: write
+      actions: write
+      checks: write
+      contents: write
+      id-token: write
+      packages: read
+      pull-requests: write
     with:
       image_url: ${{ needs.build.outputs.image-url }}
       workdir: /app
       directory_to_test: tests/
       env_django_settings_module: todo-make-this-optional
-    secrets: inherit
-
-  destroy:
-    if: always()
-    needs:
-      [
-        releasetag,
-        build,
-        unit-tests,
-        static-metrics,
-      ]
-    uses: ZeroGachis/.github/.github/workflows/delete-docker-image.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-      packages: write
-    with:
-      image_name: nurse
-      image_version: ${{ needs.build.outputs.image-version }}
     secrets: inherit
