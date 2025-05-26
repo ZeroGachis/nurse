@@ -6,7 +6,7 @@ legacy_version_file = false
 python.compile = true
 
 [tools]
-python = "3.12"
+python = "3.13.3"
 poetry = "1.8"
 "aqua:aws/aws-cli" = "latest"
 
