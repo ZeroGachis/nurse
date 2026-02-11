@@ -9,21 +9,30 @@ homepage = "https://github.com/ZeroGachis/nurse"
 keywords = ["dependency", "injection"]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "~3.13"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0"
-ruff = "^0.11.0"
-pre-commit = "^4.0.1"
-pytest-cov = "^6.0.0"
-pyright = "^1.1.388"
+pytest = "^9.0"
+ruff = "^0.15"
+pre-commit = "^4"
+basedpyright = "^1.37"
+
+[tool.poetry.group.ci]
+optional = true
+
+[tool.poetry.group.ci.dependencies]
+pytest-github-actions-annotate-failures = "^0.3.0"
+pytest-cov = "^7.0.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib"]
+addopts = [
+    "--import-mode=importlib",
+    "--disable-plugin-autoload",
+]
 pythonpath = "./"
 
 [tool.coverage.run]
@@ -36,7 +45,7 @@ source = ["nurse"]
 line-length = 88
 # It would be preferable to use python's standard "project.requires-python"
 # but poetry does not comply with it.
-target-version = "py312"
+target-version = "py313"
 
 [tool.pyright]
 venvPath = "."
