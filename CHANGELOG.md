@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/ZeroGachis/nurse/compare/2.0.1...2.1.0) (2026-02-11)
+
+
+### Features
+
+* add security scan workflow ([32586ba](https://github.com/ZeroGachis/nurse/commit/32586ba51762a83ce3eac14ed10673521c9bdb40))
+
+
+### Miscellaneous Chores
+
+* **deps:** update zerogachis/.github action to v5 ([c4bdfcb](https://github.com/ZeroGachis/nurse/commit/c4bdfcb5d02970413d98d484b37f48f4ff6c57f7))
+* Move to Python3.13 / poetry 2.2 + Speedup CI + Bump deps ([ef28828](https://github.com/ZeroGachis/nurse/commit/ef28828643f8a6e3d9963698e65940652bd56b32))
+
 ## [2.0.1](https://github.com/ZeroGachis/nurse/compare/2.0.0...2.0.1) (2025-04-30)
 
 
