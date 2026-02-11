@@ -3,11 +3,10 @@
 # and consider this toml file as the only source of truth
 # Cf: https://mise.jdx.dev/configuration.html#idiomatic-version-files
 legacy_version_file = false
-python.compile = true
 
 [tools]
-python = "3.12"
-poetry = "1.8"
+python = "3.13"
+poetry = "2.2"
 "aqua:aws/aws-cli" = "latest"
 
 [env]
