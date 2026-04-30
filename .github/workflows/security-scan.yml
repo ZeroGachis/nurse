@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   security_scan:
-    uses: ZeroGachis/.github/.github/workflows/security-scan.yml@v7.3
+    uses: ZeroGachis/.github/.github/workflows/security-scan.yml@v7
     secrets: inherit
     with:
       scan-image: false
