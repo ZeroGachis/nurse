@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/ZeroGachis/nurse/compare/2.1.0...2.1.1) (2026-04-30)
+
+
+### Continuous Integration
+
+* Add security-scan workflow ([ebd44cb](https://github.com/ZeroGachis/nurse/commit/ebd44cbd2fa4e82ed45d0deb1a01266c0dd51d65))
+* Only depends on a major release (v7) of the security-scan workflow ([050538a](https://github.com/ZeroGachis/nurse/commit/050538ab39085388fbcd9c622c9af0f59ea3d07a))
+* Run security-scan workflow only once a week (every monday at 6AM) ([d1f23b1](https://github.com/ZeroGachis/nurse/commit/d1f23b17a3b125e4b59c7028846380b50516d19c))
+
 ## [2.1.0](https://github.com/ZeroGachis/nurse/compare/2.0.1...2.1.0) (2026-02-11)
 
 
