@@ -21,7 +21,7 @@ basedpyright = "^1.37"
 optional = true
 
 [tool.poetry.group.ci.dependencies]
-pytest-github-actions-annotate-failures = "^0.3.0"
+pytest-github-actions-annotate-failures = "^0.4.0"
 pytest-cov = "^7.0.0"
 
 [build-system]
