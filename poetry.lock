@@ -364,18 +364,18 @@ testing = ["process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
 name = "pytest-github-actions-annotate-failures"
-version = "0.3.0"
+version = "0.4.2"
 description = "pytest plugin to annotate failed tests with a workflow command for GitHub Actions"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.10"
 groups = ["ci"]
 files = [
-    {file = "pytest_github_actions_annotate_failures-0.3.0-py3-none-any.whl", hash = "sha256:41ea558ba10c332c0bfc053daeee0c85187507b2034e990f21e4f7e5fef044cf"},
-    {file = "pytest_github_actions_annotate_failures-0.3.0.tar.gz", hash = "sha256:d4c3177c98046c3900a7f8ddebb22ea54b9f6822201b5d3ab8fcdea51e010db7"},
+    {file = "pytest_github_actions_annotate_failures-0.4.2-py3-none-any.whl", hash = "sha256:02911cd3b55f235328a334f8ca6037a89944398b8e8b028c82de97111eff4071"},
+    {file = "pytest_github_actions_annotate_failures-0.4.2.tar.gz", hash = "sha256:5dd18304512361788bc7b5c5c805db853f03f4950c6be09b088de6bab8e2e6c9"},
 ]
 
 [package.dependencies]
-pytest = ">=6.0.0"
+pytest = ">=7.0.0"
 
 [[package]]
 name = "pyyaml"
@@ -512,4 +512,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = "~3.13"
-content-hash = "54d0508b84f7a9fd60d3f6374630ff9cf3f17b2398724f5a066649e81782a078"
+content-hash = "14dafcaad77aabc5cddd327af7e39c44d3ebbd1b37a43433bfdb7c7d0b52013d"
