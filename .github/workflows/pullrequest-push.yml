@@ -33,7 +33,7 @@ jobs:
           install_args: python poetry
           cache: true
       - name: Install Python dependencies
-        uses: ZeroGachis/.github/.github/actions/poetry-install@v5
+        uses: ZeroGachis/.github/.github/actions/poetry-install@v6
         with:
           aws_account_id: ${{ vars.PULL_REQUEST_AWS_ACCOUNT_ID }}
           install_options: --with ci
